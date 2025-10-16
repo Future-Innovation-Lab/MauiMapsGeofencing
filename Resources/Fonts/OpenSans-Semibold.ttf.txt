@@ -1,0 +1,2 @@
+This file is for reference only and would contain the OpenSans-Semibold.ttf font file in a real project.
+You would need to download the actual font files from Google Fonts and place them here.

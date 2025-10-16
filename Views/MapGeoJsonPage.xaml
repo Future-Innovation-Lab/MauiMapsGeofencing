@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
+             xmlns:controls="clr-namespace:MauiGeoJsonMapping.Controls"
+             x:Class="MauiGeoJsonMapping.Views.MapGeoJsonPage"
+             Title="GeoJson Mapping Example">
+    
+    <Grid RowDefinitions="*, Auto">
+        <controls:CustomMap x:Name="Map"
+                            Grid.Row="0"
+                            ItemsSource="{Binding Locations}"
+                            MapElementsSource="{Binding MapElements}"
+                            Region="{Binding MapCenter}">
+            <maps:Map.ItemTemplate>
+                <DataTemplate>
+                    <maps:Pin Location="{Binding Position}"
+                              Label="{Binding Name}" />
+                </DataTemplate>
+            </maps:Map.ItemTemplate>
+        </controls:CustomMap>
+        
+        <Grid Grid.Row="1" 
+              Padding="10"
+              ColumnDefinitions="*"
+              RowDefinitions="Auto, Auto">
+            
+            <!-- User Input Section -->
+            <Border Grid.Row="0"
+                    Stroke="{AppThemeBinding Light=#CCCCCC, Dark=#444444}"
+                    StrokeThickness="1"
+                    Background="{AppThemeBinding Light=#F8F8F8, Dark=#1E1E1E}"
+                    Padding="10"
+                    Margin="5">
+                <Grid ColumnDefinitions="Auto, *, Auto, *, Auto"
+                      ColumnSpacing="5">
+                    <Label Grid.Column="0" 
+                           Text="Lat:" 
+                           VerticalOptions="Center"
+                           FontSize="12"/>
+              <Entry Grid.Column="1" 
+                  Text="{Binding LatitudeText}"
+                           Keyboard="Numeric"
+                           FontSize="12"
+                           VerticalOptions="Center"/>
+                    <Label Grid.Column="2" 
+                           Text="Lon:" 
+                           VerticalOptions="Center"
+                           FontSize="12"/>
+              <Entry Grid.Column="3" 
+                  Text="{Binding LongitudeText}"
+                           Keyboard="Numeric"
+                           FontSize="12"
+                           VerticalOptions="Center"/>
+                    <Button Grid.Column="4"
+                            Text="Plot"
+                Command="{Binding PlotUserPointCommand}"
+                            FontSize="12"
+                            Padding="10,5"
+                            VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+            
+         <Label Grid.Row="1"
+             Text="{Binding ResultText}"
+                   Padding="10"
+                   BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#2A2A2A}"
+                   FontSize="12"
+                   Margin="5" />
+        </Grid>
+    </Grid>
+    
+</ContentPage>
